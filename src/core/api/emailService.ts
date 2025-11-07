@@ -1,5 +1,5 @@
 import { emailProviderConfig } from '../config/emailConfig';
-import { User, Unit } from '../models/data';
+import { User, Unit, Booking } from '../models/data';
 import { registrationTemplate, newScheduleNotificationTemplate } from '../email/templates';
 
 export interface EmailParams {
@@ -46,7 +46,7 @@ export const createNewScheduleNotificationEmail = (user: User, weekLabel: string
   };
 };
 
-export const createGuestReservationConfirmationEmail = (booking: any, unit: Unit): EmailParams | null => {
+export const createGuestReservationConfirmationEmail = (booking: Booking, unit: Unit): EmailParams | null => {
     if (!booking.contact?.email) return null;
     const locale = booking.locale || 'hu';
     const subject = locale === 'hu' ? `Foglalási kérés a ${unit.name} étterembe` : `Reservation request for ${unit.name}`;
@@ -59,7 +59,7 @@ export const createGuestReservationConfirmationEmail = (booking: any, unit: Unit
     };
 };
 
-export const createUnitNewReservationNotificationEmail = (booking: any, unit: Unit, recipientEmails: string[]): EmailParams => {
+export const createUnitNewReservationNotificationEmail = (booking: Booking, unit: Unit, recipientEmails: string[]): EmailParams => {
      const subject = `Új foglalási kérés érkezett - ${unit.name}`;
      const html = `<p>Új foglalási kérés érkezett a(z) ${unit.name} egységbe.</p>
         <p><strong>Név:</strong> ${booking.name}</p>

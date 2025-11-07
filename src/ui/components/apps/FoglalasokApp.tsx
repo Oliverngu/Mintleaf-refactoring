@@ -3,7 +3,7 @@ import { Booking, User, Unit } from '../../../core/models/data';
 import { db, Timestamp, serverTimestamp } from '../../../core/firebase/config';
 import { collection, query, where, orderBy, onSnapshot, addDoc, doc, updateDoc } from 'firebase/firestore';
 import BookingIcon from '../icons/BookingIcon';
-import LoadingSpinner from '../LoadingSpinner';
+import LoadingSpinner from '../common/LoadingSpinner';
 import AddBookingModal from './AddBookingModal';
 import PlusIcon from '../icons/PlusIcon';
 import SettingsIcon from '../icons/SettingsIcon';

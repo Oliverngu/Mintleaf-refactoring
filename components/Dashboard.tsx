@@ -3,7 +3,7 @@ import { User, Request, Booking, Shift, Todo, Contact, ContactCategory, Position
 import { db } from '../firebase/config';
 
 // Import App Components
-import KerelemekApp from './apps/KerelemekApp';
+import { KerelemekApp } from './apps/KerelemekApp';
 import FoglalasokApp from './apps/FoglalasokApp';
 import { BeosztasApp } from './apps/BeosztasKeszitoApp';
 import UserSettingsApp from './apps/UserSettingsApp';
@@ -157,8 +157,12 @@ const Dashboard: React.FC<DashboardProps> = ({
   
   const hasPermission = (permission: keyof Permissions | 'canManageAdminPage'): boolean => {
     if (currentUser.role === 'Admin') return true;
-    if (currentUser.role === 'Demo User') { 
-        return permission.startsWith('canView') || permission === 'canSubmitLeaveRequests';
+    if (currentUser.role === 'Demo User') {
+        // FIX: Ensure permission is a string before calling startsWith to prevent runtime errors.
+        if (typeof permission === 'string') {
+            return permission.startsWith('canView') || permission === 'canSubmitLeaveRequests';
+        }
+        return false;
     }
     if (permission === 'canManageAdminPage') {
         return currentUser.role === 'Unit Admin' || hasPermission('canManageUsers') || hasPermission('canManagePositions') || hasPermission('canManageUnits');

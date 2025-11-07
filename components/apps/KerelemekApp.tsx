@@ -192,7 +192,7 @@ const RequestForm: React.FC<RequestFormProps> = ({ user, onSubmit, onCancel, all
 };
 
 
-const KerelemekApp: React.FC<KerelemekAppProps> = ({ requests, loading, error, currentUser, canManage }) => {
+export const KerelemekApp: React.FC<KerelemekAppProps> = ({ requests, loading, error, currentUser, canManage }) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const isAdmin = canManage;
 
@@ -376,4 +376,5 @@ const KerelemekApp: React.FC<KerelemekAppProps> = ({ requests, loading, error, c
   );
 };
 
-export default KerelemekApp;
+// FIX: Changed from default to named export
+// export default KerelemekApp;
